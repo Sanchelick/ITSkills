@@ -1,0 +1,25 @@
+<nav class="navbar">
+      <div class="nav-container">
+        <%= link_to root_path, class: "nav-brand" do %>
+          <i class="fa-solid fa-brain"></i>
+          <span>SkillCert<strong>AI</strong></span>
+        <% end %>
+
+        <div class="nav-links">
+          <% if user_signed_in? %>
+            <%= link_to account_path, class: "nav-item" do %>
+              <i class="fa-solid fa-user"></i> Мой профиль
+            <% end %>
+            <%= link_to new_quiz_path, class: "nav-item nav-item-btn" do %>
+              <i class="fa-solid fa-plus"></i> Пройти тест
+            <% end %>
+            <%= button_to destroy_user_session_path, method: :delete, class: "nav-logout-btn" do %>
+              <i class="fa-solid fa-right-from-bracket"></i> Выйти
+            <% end %>
+          <% else %>
+            <%= link_to "Войти", new_user_session_path, class: "nav-item" %>
+            <%= link_to "Регистрация", new_user_registration_path, class: "nav-item nav-item-btn" %>
+          <% end %>
+        </div>
+      </div>
+</nav>

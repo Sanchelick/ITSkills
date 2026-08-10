@@ -1,0 +1,95 @@
+<div class="quiz-page-container">
+  <header class="quiz-header">
+    <div class="header-content">
+      <div class="badge-group">
+        <span class="skill-badge"><%= @quiz.skill.name %></span>
+        <span class="level-badge level-<%= @quiz.target_level %>"><%= @quiz.target_level.capitalize %></span>
+      </div>
+      <h1>Тестирование компетенции</h1>
+      <p class="subtitle">Ответьте на все вопросы и решите практическую задачу для оценки вашего уровня.</p>
+    </div>
+    <div class="quiz-meta">
+      <div class="meta-item">
+        <span class="meta-label">Вопросов:</span>
+        <span class="meta-value"><%= @questions.count %></span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Статус:</span>
+        <span class="meta-value status-tag"><%= @quiz.status.humanize %></span>
+      </div>
+    </div>
+  </header>
+
+  <%= form_with url: quiz_user_responses_path(@quiz), method: :post, local: true, class: "quiz-form" do |f| %>
+    <div class="questions-list">
+      <% @questions.each_with_index do |question, index| %>
+        <article class="question-card">
+          <div class="question-card-header">
+            <span class="question-number">Вопрос <%= index + 1 %> из <%= @questions.count %></span>
+            <span class="type-tag <%= question.question_type %>">
+              <%= question.mcq? ? "Выбор ответа" : "Написание кода" %>
+            </span>
+          </div>
+
+          <div class="question-prompt">
+            <%= simple_format(question.prompt) %>
+          </div>
+
+          <% if question.mcq? %>
+            <div class="options-group">
+              <% question.options.each do |option| %>
+                <label class="option-label">
+                  <%= radio_button_tag "answers[#{question.id}]", option, false, required: true, class: "option-radio" %>
+                  <span class="option-text"><%= option %></span>
+                </label>
+              <% end %>
+            </div>
+          <% elsif question.code_submission? %>
+            <div class="code-editor-wrapper">
+              <div class="code-editor-header">
+                <span><i class="fa-solid fa-code"></i> Редактор решения</span>
+                <span class="editor-lang"><%= @quiz.skill.name %></span>
+              </div>
+              <%= text_area_tag "answers[#{question.id}]", 
+                                question.code_starter, 
+                                rows: 12, 
+                                required: true,
+                                class: "code-textarea", 
+                                placeholder: "// Напишите ваш код здесь...",
+                                spellcheck: false %>
+            </div>
+          <% end %>
+        </article>
+      <% end %>
+    </div>
+
+    <div class="quiz-submit-bar">
+      <div class="submit-info">
+        <i class="fa-solid fa-circle-info"></i> Убедитесь, что ответили на все вопросы перед отправкой.
+      </div>
+      <%= f.submit "Завершить тест и проверить", class: "btn-primary btn-lg" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="quiz-results">
+  <h2>Результаты теста по <%= @quiz.skill.name %> (<%= @quiz.target_level %>)</h2>
+
+  <% if @quiz.status == "completed" %>
+    <div class="card p-4 my-3 <%= @quiz.passed? ? 'border-success' : 'border-danger' %>">
+      <h3>
+        Итоговый результат: <%= @quiz.score %>% 
+        (<%= @quiz.correct_answers_count %> из <%= @quiz.total_questions_count %> правильных)
+      </h3>
+
+      <% if @quiz.passed? %>
+        <p class="text-success fw-bold">🎉 Поздравляем! Вы успешно прошли тест!</p>
+        <p>Вы продемонстрировали отличный уровень знаний по технологии <%= @quiz.skill.name %>.</p>
+      <% else %>
+        <p class="text-danger fw-bold">❌ Тест не сдан (нужно минимум <%= Quiz::PASSING_SCORE_PERCENTAGE %>%).</p>
+        <p>Рекомендуем повторить базовые темы и попробовать пройти тест ещё раз.</p>
+      <% end %>
+    </div>
+  <% else %>
+    <p>Тест ещё находится в процессе прохождения.</p>
+  <% end %>

@@ -1,0 +1,24 @@
+<div class="container container-narrow">
+  <div class="card form-card">
+    <div class="card-header">
+      <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Генерация нового теста</h2>
+      <p>Выберите технологию и уровень. ИИ сгенерирует уникальные вопросы в реальном времени.</p>
+    </div>
+
+    <%= form_with url: quizzes_path, method: :post, local: true, class: "styled-form" do |f| %>
+      <div class="form-group">
+        <%= f.label :skill_id, "Технология / Стек:" %>
+        <%= f.collection_select :skill_id, @skills, :id, :name, { prompt: "Выберите технологию из списка..." }, { class: "form-control", required: true } %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :target_level, "Целевой уровень компетенции:" %>
+        <%= f.select :target_level, Quiz.target_levels.keys.map { |k| [k.capitalize, k] }, {}, { class: "form-control" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Сгенерировать тест с помощью ИИ", class: "btn-primary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+</div>

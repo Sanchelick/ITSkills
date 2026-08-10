@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="profile-header">
+    <div class="avatar-circle">
+      <i class="fa-solid fa-user-astronaut"></i>
+    </div>
+    <div class="profile-info">
+      <h1>Личный кабинет</h1>
+      <p class="user-email"><%= @user.email %></p>
+    </div>
+  </div>
+
+  <section class="section-block">
+    <div class="section-header">
+      <h2><i class="fa-solid fa-award"></i> Мои ачивки и компетенции</h2>
+      <%= link_to new_quiz_path, class: "btn-primary btn-sm" do %>
+        <i class="fa-solid fa-plus"></i> Подтвердить новый навык
+      <% end %>
+    </div>
+
+    <% if @user_skills.any? %>
+      <div class="badges-grid">
+        <% @user_skills.each do |user_skill| %>
+          <div class="badge-card level-border-<%= user_skill.level %>">
+            <div class="badge-icon">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div class="badge-content">
+              <h3><%= user_skill.skill.name %></h3>
+              <span class="level-pill level-<%= user_skill.level %>"><%= user_skill.level.upcase %></span>
+              <p class="badge-score"><i class="fa-solid fa-star"></i> Баллы: <%= user_skill.score %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="fa-solid fa-graduation-cap empty-icon"></i>
+        <h3>У вас пока нет подтверждённых навыков</h3>
+        <p>Пройдите ваш первый ИИ-тест, чтобы получить ачивку и подтвердить уровень компетенции.</p>
+        <%= link_to "Пройти первый тест", new_quiz_path, class: "btn-primary" %>
+      </div>
+    <% end %>
+  </section>
+</div>

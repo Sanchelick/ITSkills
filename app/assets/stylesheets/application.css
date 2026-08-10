@@ -1,0 +1,467 @@
+/* ==========================================
+   1. СБРОС СТИЛЕЙ И БАЗОВЫЕ ПЕРЕМЕННЫЕ
+   ========================================== */
+:root {
+  --primary: #005088;
+  --primary-hover: #003860;
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================
+   2. НАВИГАЦИОННАЯ ПАНЕЛЬ (NAVBAR)
+   ========================================== */
+.navbar {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-brand strong {
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-item {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.nav-item:hover {
+  color: var(--primary);
+}
+
+.nav-item-btn {
+  background-color: #e0f2fe;
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+}
+
+.nav-item-btn:hover {
+  background-color: #bae6fd;
+}
+
+.nav-logout-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+/* ==========================================
+   3. СЕТКА И СТРУКТУРА СТРАНИЦ
+   ========================================== */
+.main-content {
+  flex: 1;
+  padding-bottom: 60px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.container-narrow {
+  max-width: 600px;
+}
+
+/* ==========================================
+   4. КНОПКИ И ФОРМЫ
+   ========================================== */
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 16px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.styled-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  background-color: #fff;
+  font-family: inherit;
+}
+
+.form-control:focus {
+  outline: 2px solid var(--primary);
+  border-color: transparent;
+}
+
+/* ==========================================
+   5. ВЕДОМСТВА И УВЕДОМЛЕНИЯ (FLASH)
+   ========================================== */
+.flash-messages {
+  max-width: 1000px;
+  margin: 15px auto 0;
+  padding: 0 20px;
+}
+
+.flash {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.flash-notice { background-color: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+.flash-alert { background-color: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+
+/* ==========================================
+   6. ЛИЧНЫЙ КАБИНЕТ И АЧИВКИ
+   ========================================== */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  margin-bottom: 30px;
+}
+
+.avatar-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.user-email {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.section-block {
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.badge-card {
+  border: 1px solid var(--border-color);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: #fafafa;
+}
+
+.badge-icon {
+  font-size: 32px;
+  color: var(--primary);
+}
+
+.level-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 4px;
+}
+
+.level-junior { background: #dcfce7; color: #15803d; }
+.level-middle { background: #dbeafe; color: #1e40af; }
+.level-senior { background: #fef3c7; color: #92400e; }
+.level-lead   { background: #fce7f3; color: #9d174d; }
+
+.level-border-junior { border-left-color: #22c55e; }
+.level-border-middle { border-left-color: #3b82f6; }
+.level-border-senior { border-left-color: #f59e0b; }
+.level-border-lead   { border-left-color: #ec4899; }
+
+.badge-score {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* ==========================================
+   7. СТРАНИЦА ТЕСТА (QUIZ)
+   ========================================== */
+.quiz-page-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.quiz-header {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.badge-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.skill-badge {
+  background-color: var(--primary);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quiz-meta {
+  background: var(--bg-main);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+}
+
+.meta-item {
+  font-size: 13px;
+  display: flex;
+  gap: 8px;
+}
+
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.question-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.question-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.question-number {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.type-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.type-tag.mcq { background: #f0fdf4; color: #166534; }
+.type-tag.code_submission { background: #faf5ff; color: #6b21a8; }
+
+.options-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.option-label:hover {
+  background: #f1f5f9;
+}
+
+.option-radio {
+  margin-right: 12px;
+  accent-color: var(--primary);
+}
+
+.code-editor-wrapper {
+  border: 1px solid #334155;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.code-editor-header {
+  background: #1e293b;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  color: #94a3b8;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.code-textarea {
+  width: 100%;
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  padding: 14px;
+  border: none;
+  outline: none;
+  resize: vertical;
+}
+
+.quiz-submit-bar {
+  margin-top: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
