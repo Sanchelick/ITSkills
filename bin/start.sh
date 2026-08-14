@@ -1,18 +1,16 @@
-
 #!/usr/bin/env bash
-# Завершать скрипт при критических ошибках
 set -e
 
 echo "==> Проверка подключения к базе данных..."
 
-# Цикл ожидания: пытаемся выполнить db:prepare, пока база не ответит успешно
+# Цикл ожидания готовности PostgreSQL
 until bundle exec rails db:prepare 2>/dev/null; do
   echo "==> База данных PostgreSQL еще запускается. Повторная попытка через 2 секунды..."
   sleep 2
 done
 
-echo "==> База данных готова и миграции выполнены успешно!"
-echo "==> Запуск веб-сервера Puma..."
+echo "==> База данных готова!"
+echo "==> Запуск веб-сервера Puma на 0.0.0.0:${PORT:-3000}..."
 
-# Запускаем Puma на порту, который выделил Railway
-exec bundle exec puma -C config/puma.rb -p ${PORT:-3000}
+# Явно связываем Puma с 0.0.0.0 и динамическим портом PORT
+exec bundle exec puma -C config/puma.rb -b tcp://0.0.0.0:${PORT:-3000}
