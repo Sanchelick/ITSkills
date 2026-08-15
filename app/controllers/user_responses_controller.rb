@@ -16,9 +16,8 @@ def create
     # 2. Сохраняем ответ пользователя
     @quiz.user_responses.create!(
       question: @question,
-      answer_text: params[:user_answer],
-      is_correct: evaluation["is_correct"],
-      feedback: evaluation["feedback"]
+      text: params[:user_answer],
+      correct: evaluation["is_correct"],
     )
 
     # 3. Проверяем, ответил ли пользователь на ВСЕ вопросы
