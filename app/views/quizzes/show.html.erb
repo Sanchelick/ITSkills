@@ -26,6 +26,7 @@
         <article class="question-card">
           <div class="question-card-header">
             <span class="question-number">Вопрос <%= index + 1 %> из <%= @questions.count %></span>
+	    <%= f.hidden_field :question_id, value: question.id %>
             <span class="type-tag <%= question.question_type %>">
               <%= question.mcq? ? "Выбор ответа" : "Написание кода" %>
             </span>
