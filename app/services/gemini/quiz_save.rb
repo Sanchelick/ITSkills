@@ -1,5 +1,5 @@
 module Gemini
-  class QuizGeneratorService
+  class QuizSave
     def self.call(user:, skill:, level:)
       # 1. Генерация текста от Gemini API
       raw_data = Gemini::QuizGenerator.generate_quiz(skill.name, level)
