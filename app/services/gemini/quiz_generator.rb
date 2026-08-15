@@ -3,7 +3,7 @@ module Gemini
     # Используем модель из ENV или актуальное дефолтное название gemini-1.5-flash
     DEFAULT_MODEL = "gemini-3.6-flash"
 
-    def initialize(skill_name:, target_level:, question_count: 5)
+    def initialize(skill_name:, target_level:, question_count: 10)
       @skill_name = skill_name
       @target_level = target_level
       @question_count = question_count

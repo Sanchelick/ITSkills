@@ -22,7 +22,7 @@ def create
     )
 
     # 3. Проверяем, ответил ли пользователь на ВСЕ вопросы
-    if @quiz.user_answers.count == @quiz.questions.count
+    if @quiz.user_responses.count == @quiz.questions.count
       # Если это был последний вопрос — подводим итоги!
       @quiz.complete_quiz!
       redirect_to quiz_path(@quiz), notice: "Тест завершён! Ознакомьтесь с результатами."

@@ -2,8 +2,8 @@ class Quiz < ApplicationRecord
   belongs_to :user
   belongs_to :skill
 
-  has_many :questions
-  has_many :user_responses
+  has_many :questions, dependent: :destroy
+  has_many :user_responses, dependent: :destroy
 
   enum :target_level, { junior: 0, middle: 1, senior: 2, lead: 3 }
   enum :status, { pending: 0, in_progress: 1, completed: 2 }
