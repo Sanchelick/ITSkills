@@ -14,7 +14,7 @@ def create
     ).call
 
     # 2. Сохраняем ответ пользователя
-    @quiz.user_answers.create!(
+    @quiz.user_responses.create!(
       question: @question,
       answer_text: params[:user_answer],
       is_correct: evaluation["is_correct"],
