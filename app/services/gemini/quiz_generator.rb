@@ -22,8 +22,8 @@ module Gemini
       # Выполняем HTTP-запрос к Gemini API
       response = Faraday.post(api_endpoint) do |req|
         req.headers["Content-Type"] = "application/json"
-        req.options.timeout = 15
-        req.options.open_timeout = 5
+        req.options.timeout = 120
+        req.options.open_timeout = 15
         req.body = request_payload.to_json
       end
 
