@@ -3,7 +3,6 @@ class UserResponsesController < ApplicationController
   before_action :set_quiz
 
 def create
-    @quiz = Quiz.find(params[:quiz_id])
     @question = @quiz.questions.find(params[:question_id])
 
     # 1. Проверяем ответ с помощью Gemini::ResponseEvaluator
@@ -35,5 +34,9 @@ def create
 
   def set_quiz
     @quiz = current_user.quizzes.find(params[:quiz_id])
+  end
+
+  def user_responce_params
+    params.require(:user_responce).permit(:question_id, :user_params)
   end
 end
